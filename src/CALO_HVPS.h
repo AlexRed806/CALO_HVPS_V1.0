@@ -11,6 +11,10 @@ class Quasar_Callback;
 
 class CALO_HVPS: public PluginsBase {
 public:
+    
+    ifstream inFile;
+
+    
 	CALO_HVPS();
 	int init(const std::string& chaine);
 	int close();
@@ -42,7 +46,6 @@ private:
 	int setRamp(const std::string &element, const std::string &rampUp,
 			const std::string &rampDwn);
     
-    ifstream inFile;
     
     struct optical_module{
 
