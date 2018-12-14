@@ -12,9 +12,6 @@ class Quasar_Callback;
 class CALO_HVPS: public PluginsBase {
 public:
     
-    ifstream inFile;
-
-    
 	CALO_HVPS();
 	int init(const std::string& chaine);
 	int close();
