@@ -216,7 +216,7 @@ int CALO_HVPS::startAndStopChannel(const std::string &element,const int iteratio
 	int ret=0;
 	std::string elementFinal = element;
 	elementFinal +=".Pw";
-    for(int =0 ; i<ierattion ; i++) {
+    for(int i=0 ; i<ierattion ; i++) {
 	ret = m_quasar_manager->setVariable(elementFinal.c_str(),1);
 	wait(100);
     ret = m_quasar_manager->setVariable(elementFinal.c_str(),0);
