@@ -146,7 +146,7 @@ int CALO_HVPS::init(const std::string& l_chaine) {
 
             optical_module _optical_module_;
             
-            ifstream inFile("calorimeter.map");
+            inFile.open("calorimeter.map");
             string strOneLine;
             
             while (inFile) {
