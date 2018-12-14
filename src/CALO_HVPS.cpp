@@ -136,6 +136,34 @@ int CALO_HVPS::init(const std::string& l_chaine) {
     // Mandatory always need
     PluginsBase::init(l_chaine);
     
+    
+    ///////////   This part is to fill the mapping and reference values of OMs, added by Alessandro (not sure it should go here)   ///////////
+    
+
+    for(int i_module = FIRST_INDEX_MODULE; i_module < NB_MAX_MODULE; i_module++) {
+        
+        for(int i_ch = FIRST_INDEX_CHANNEL; i_ch < NB_MAX_CHANNEL; i_ch++) {
+
+            optical_module _optical_module_;
+            
+            ifstream inFile("calorimeter.map");
+            string strOneLine;
+            
+            while (inFile) {
+                
+                getline(inFile, strOneLine);
+                
+                if(strOneLine[0] != "#")
+                    cout << strOneLine << endl;
+            }
+            
+            inFile.close();
+      
+        }
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     std::string chaine=l_chaine;
     int ret=0;
     chaine = chaine + " ";

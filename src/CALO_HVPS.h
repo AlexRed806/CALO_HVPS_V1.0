@@ -40,14 +40,23 @@ private:
 	int setRamp(const std::string &element, const std::string &rampUp,
 			const std::string &rampDwn);
     
-    struct electronic_channel{
-        unsigned short int board;
-        unsigned short int channel;
+    struct optical_module{
+
+        struct electronic_channel{
+            unsigned short int board;
+            unsigned short int channel;
+        };
+        struct location_channel{
+            unsigned short int row;
+            unsigned short int column;
+        };
+        std::map<electronic_channel,location_channel> channel_mapping;
+
+        int om_id;
+        int om_number;
+        int nominal_voltage;
     };
-    struct location_channel{
-        unsigned short int row;
-        unsigned short int column;
-    };
+    std::vector<optical_module> optical_modules;
     
 };
 #endif //  CALO_HVPS_H__
