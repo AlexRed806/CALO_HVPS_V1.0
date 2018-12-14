@@ -33,11 +33,21 @@ private:
 	Quasar_Callback *my_callBack;
 
 	int startChannel(const std::string &element);
-	int startAndStopChannel(const std::string &elementi,int ieration);
+	int startAndStopChannel(const std::string &element,int ieration);
 	int stopChannel(const std::string &element);
 	int setChannel(const std::string &element, const std::string &voltage);
 	int setFan(const std::string &element,const std::string  &fan);
 	int setRamp(const std::string &element, const std::string &rampUp,
 			const std::string &rampDwn);
+    
+    struct electronic_channel{
+        unsigned short int board;
+        unsigned short int channel;
+    };
+    struct location_channel{
+        unsigned short int row;
+        unsigned short int column;
+    };
+    
 };
 #endif //  CALO_HVPS_H__
