@@ -2,6 +2,8 @@
 #define CALO_HVPS_H_ 
 
 #include "pluginsBase.h"
+#include <iostream>
+#include <string>
 
 class Quasar_Manager;
 class ConfigQuasar;

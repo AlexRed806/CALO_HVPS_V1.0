@@ -153,7 +153,7 @@ int CALO_HVPS::init(const std::string& l_chaine) {
                 
                 getline(inFile, strOneLine);
                 
-                if(strOneLine[0] != "#")
+                if(strOneLine.compare(0,1,"#"))
                     cout << strOneLine << endl;
             }
             
