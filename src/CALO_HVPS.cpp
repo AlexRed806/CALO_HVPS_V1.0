@@ -216,9 +216,9 @@ int CALO_HVPS::startAndStopChannel(const std::string &element,const int iteratio
 	int ret=0;
 	std::string elementFinal = element;
 	elementFinal +=".Pw";
-    for(int i=0 ; i<ierattion ; i++) {
+    for(int i=0 ; i<iteration ; i++) {
 	ret = m_quasar_manager->setVariable(elementFinal.c_str(),1);
-	wait(100);
+	//wait(100);
     ret = m_quasar_manager->setVariable(elementFinal.c_str(),0);
     }
 	return ret;
@@ -379,16 +379,16 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                     for(int j=(FIRST_INDEX_CHANNEL); j<(NB_MAX_CHANNEL - FIRST_INDEX_CHANNEL); j++) {
                         sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,j);
                         if(chaine.find("StartChannel")==0) startChannel(RacineElementCh);
+                        if(chaine.find("StartAndStopChannel")==0) startAndStopChannel(RacineElementCh,iteration);
                         if(chaine.find("StopChannel")==0) stopChannel(RacineElementCh);
                         if(chaine.find("SetChannel")==0) setChannel(RacineElementCh,voltage);
-                        if(chaine.find("StartAndStopChannel")==0) startAndStopChannel(RacineElementCh,voltage,iteration);
-                        
                         if(chaine.find("SetRamp")==0) setRamp(RacineElementCh,rampUp,rampDwn);
                     }
                 }
                 else {
                     sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,channelNumber);
                     if(chaine.find("StartChannel")==0) startChannel(RacineElementCh);
+                    if(chaine.find("StartAndStopChannel")==0) startAndStopChannel(RacineElementCh,iteration);
                     if(chaine.find("StopChannel")==0) stopChannel(RacineElementCh);
                     if(chaine.find("SetChannel")==0) setChannel(RacineElementCh,voltage);
                     if(chaine.find("SetRamp")==0) setRamp(RacineElementCh,rampUp,rampDwn);
