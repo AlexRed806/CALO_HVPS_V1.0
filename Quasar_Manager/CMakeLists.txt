@@ -1,4 +1,9 @@
 PROJECT (Quasar_Manager)
+
+
+   FIND_PACKAGE( LibXml2 )
+    include_directories(${MOS_PATH}/../include/MOS_Plugin)
+
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
 
 include_directories(${LIBXML2_INCLUDE_DIR})
