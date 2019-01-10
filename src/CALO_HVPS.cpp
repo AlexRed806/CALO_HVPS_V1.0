@@ -156,7 +156,8 @@ int CALO_HVPS::init(const std::string& l_chaine) {
                 getline(inFile, strOneLine);
                 
                 if(strOneLine.compare(0,1,"#"))
-                    cout << strOneLine << endl;
+		  std::cout << strOneLine << endl;
+		else std::cout <<"Ciao bello"<<std::endl;
             }
             
             inFile.close();
