@@ -49,6 +49,7 @@ private:
     struct optical_module{
 
         struct electronic_channel{
+            unsigned short int crate;
             unsigned short int board;
             unsigned short int channel;
         };

@@ -153,28 +153,58 @@ int CALO_HVPS::init(const std::string& l_chaine) {
         
         if(str_file_line.compare(0,1,"M") == 0) {
             
+            optical_module _optical_module_;
+            
+            std::string str_row = str_file_line.substr(5,2);
+            _optical_module_.location_channel.row = std::stoi(str_row);
+            
+            std::string str_column = str_file_line.substr(8,2);
+            _optical_module_.location_channel.column = std::stoi(str_column);
+            
             std::string str_crate = str_file_line.substr(14,1);
-            int crate = std::stoi(str_crate);
+            _optical_module_.electronic_channel.crate = std::stoi(str_crate);
             
             std::string str_board = str_file_line.substr(16,2);
-            int board = std::stoi(str_board);
+            _optical_module_.electronic_channel.board = std::stoi(str_board);
             
             std::string str_channel = str_file_line.substr(19,2);
-            int channel = std::stoi(str_channel);
+            _optical_module_.electronic_channel.channel = std::stoi(str_channel);
             
             int file_line_length = std::distance(str_file_line.begin(),str_file_line.end());
             
             std::string str_voltage = str_file_line.substr(file_line_length-4,4);
-            int voltage = std::stoi(str_voltage);
+            _optical_module_.nominal_voltage = std::stoi(str_voltage);
             
-            //cout << crate <<" "<< board <<" "<< channel <<" "<< voltage<<" "<< str_voltage << endl;
-            //nominal_tension[crate][board][channel] = voltage;
+            optical_modules.push_back(_optical_module_);
         }
     }
     inFile.close();
     
-    //optical_module _optical_module_;
 
+    
+    /*for(int i_module = FIRST_INDEX_MODULE; i_module < NB_MAX_MODULE; i_module++) {
+        
+        for(int i_ch = FIRST_INDEX_CHANNEL; i_ch < NB_MAX_CHANNEL; i_ch++) {
+
+            
+            ifstream inFile;
+
+            inFile.open("calorimeter.map");
+            string strOneLine;
+            
+            while (inFile) {
+                
+                getline(inFile, strOneLine);
+                
+                if(strOneLine.compare(0,1,"#"))
+                    std::cout << strOneLine << endl;
+                else std::cout <<"Ciao bello"<<std::endl;
+            }
+            
+            inFile.close();
+      
+        }
+    }*/
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -332,7 +362,7 @@ printf("sonde jl CALO_HVPS::setFan\n");
 
         elementFinal = element;
         elementFinal +="HVFanSpeed";
-	int value = atoi(fan.c_str());
+        int value = atoi(fan.c_str());
         ret = m_quasar_manager->setVariable(elementFinal,value);
         if(ret) error=1;
         return error;
@@ -357,6 +387,8 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
     int iteration=1;
     std::string voltage;
     std::string rampUp, rampDwn;
+    int columnNumber = 0; //Ale
+    int rowNumber = 0; //Ale
     int flag=1;
     printf("command=%s\n",command.c_str());
     while (flag) {
@@ -382,7 +414,7 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                 if(nameString.compare("channel") ==0) {
                     channelNumber = atoi(valueString.c_str());
                 }
-                if(nameString.compare("ieration") ==0) {
+                if(nameString.compare("iteration") ==0) {
                     iteration = atoi(valueString.c_str());
                 }
                 if(nameString.compare("voltage") ==0) {
@@ -396,6 +428,12 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                 }
                 if(nameString.compare("valueFan") ==0) {
                     fan = valueString.c_str();
+                }
+                if(nameString.compare("row") ==0) {
+                    rowNumber = valueString.c_str();
+                }
+                if(nameString.compare("column") ==0) {
+                    columnNumber = valueString.c_str();
                 }
             } else {
                 //ret=1;
@@ -457,6 +495,27 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
             }
         }
     }
+    
+    /////// Ale
+    if((chaine.find("SetNominalCol")==0) ||
+       (chaine.find("SetNominalRow")==0) ||
+       (chaine.find("SetNominalAll")==0) ) {
+        
+        for(std::vector<optical_module>::iterator it = optical_modules.begin(); it != optical_modules.end(); ++it) {
+
+            sprintf(RacineElementBoard,"board%02d",*it.electronic_channel.board);
+            sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,*it.electronic_channel.channel);
+
+            if( ( *it.location_channel.column == columnNumber && chaine.find("SetNominalCol")==0 )
+               || ( *it.location_channel.row == rowNumber && chaine.find("SetNominalRow")==0 )
+               || chaine.find("SetNominalAll")==0 ) {
+                
+                setChannel(RacineElementCh,*it.nominal_voltage);
+                startChannel(RacineElementCh);
+            }
+        }
+    }
+    /////// end Ale
     
     return ret;
     
