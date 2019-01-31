@@ -139,31 +139,42 @@ int CALO_HVPS::init(const std::string& l_chaine) {
     
     ///////////   This part is to fill the mapping and reference values of OMs, added by Alessandro (not sure it should go here)   ///////////
     
+    nominal_tension[2][NB_MAX_MODULE][NB_MAX_CHANNEL];
+    
+    ifstream inFile;
 
-    for(int i_module = FIRST_INDEX_MODULE; i_module < NB_MAX_MODULE; i_module++) {
+    inFile.open("calorimeter.map",ios::in);
+
+    std::string str_file_line;
+
+    while (inFile) {
         
-        for(int i_ch = FIRST_INDEX_CHANNEL; i_ch < NB_MAX_CHANNEL; i_ch++) {
-
-            optical_module _optical_module_;
+        getline(inFile, str_file_line);
+        
+        if(str_file_line.compare(0,1,"M") == 0) {
             
-            ifstream inFile;
-
-            inFile.open("calorimeter.map");
-            string strOneLine;
+            std::string str_crate = str_file_line.substr(14,1);
+            int crate = std::stoi(str_crate);
             
-            while (inFile) {
-                
-                getline(inFile, strOneLine);
-                
-                if(strOneLine.compare(0,1,"#"))
-		  std::cout << strOneLine << endl;
-		else std::cout <<"Ciao bello"<<std::endl;
-            }
+            std::string str_board = str_file_line.substr(16,2);
+            int board = std::stoi(str_board);
             
-            inFile.close();
-      
+            std::string str_channel = str_file_line.substr(19,2);
+            int channel = std::stoi(str_channel);
+            
+            int file_line_length = std::distance(str_file_line.begin(),str_file_line.end());
+            
+            std::string str_voltage = str_file_line.substr(file_line_length-4,4);
+            int voltage = std::stoi(str_voltage);
+            
+            //cout << crate <<" "<< board <<" "<< channel <<" "<< voltage<<" "<< str_voltage << endl;
+            //nominal_tension[crate][board][channel] = voltage;
         }
     }
+    inFile.close();
+    
+    //optical_module _optical_module_;
+
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
