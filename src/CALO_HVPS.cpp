@@ -509,7 +509,7 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                || chaine.find("SetNominalAll")==0 ) {
                 
                 char s[10];
-                sprintf(s,"%d",*it.nominal_voltage);
+                sprintf(s,"%d",(*it).nominal_voltage);
                 //std::string s = string(itoa(*it.nominal_voltage));
 
                 setChannel(RacineElementCh,s);
