@@ -508,7 +508,7 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                || ( *it._location_channel_.row == rowNumber && chaine.find("SetNominalRow")==0 )
                || chaine.find("SetNominalAll")==0 ) {
                 
-                setChannel(RacineElementCh,*it.nominal_voltage);
+                setChannel(RacineElementCh,it->nominal_voltage);
                 startChannel(RacineElementCh);
             }
         }
