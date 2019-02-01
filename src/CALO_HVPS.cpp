@@ -153,20 +153,20 @@ int CALO_HVPS::init(const std::string& l_chaine) {
             
             optical_module _optical_module_;
             
-            std::string str_row = str_file_line.substr(5,2);
-            _optical_module_.location_channel.row = std::stoi(str_row);
+            string str_row = str_file_line.substr(5,2);
+            _optical_module_.location_channel.row = stoi(str_row);
             
-            std::string str_column = str_file_line.substr(8,2);
-            _optical_module_.location_channel.column = std::stoi(str_column);
+            string str_column = str_file_line.substr(8,2);
+            _optical_module_.location_channel.column = stoi(str_column);
             
-            std::string str_crate = str_file_line.substr(14,1);
-            _optical_module_.electronic_channel.crate = std::stoi(str_crate);
+            string str_crate = str_file_line.substr(14,1);
+            _optical_module_.electronic_channel.crate = stoi(str_crate);
             
-            std::string str_board = str_file_line.substr(16,2);
-            _optical_module_.electronic_channel.board = std::stoi(str_board);
+            string str_board = str_file_line.substr(16,2);
+            _optical_module_.electronic_channel.board = stoi(str_board);
             
-            std::string str_channel = str_file_line.substr(19,2);
-            _optical_module_.electronic_channel.channel = std::stoi(str_channel);
+            string str_channel = str_file_line.substr(19,2);
+            _optical_module_.electronic_channel.channel = stoi(str_channel);
             
             int file_line_length = std::distance(str_file_line.begin(),str_file_line.end());
             
