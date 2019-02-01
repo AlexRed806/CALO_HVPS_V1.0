@@ -45,7 +45,7 @@ private:
 	int setRamp(const std::string &element, const std::string &rampUp,
 			const std::string &rampDwn);
     
-    
+public:
     struct optical_module{
 
         struct electronic_channel{
