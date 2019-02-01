@@ -53,17 +53,19 @@ public:
             unsigned short int board;
             unsigned short int channel;
         };
+        electronic_channel _electronic_channel_;
+
         struct location_channel{
             unsigned short int row;
             unsigned short int column;
         };
-        std::map<electronic_channel,location_channel> channel_mapping;
-
+        location_channel _location_channel_;
+        
         int om_id;
         int om_number;
         int nominal_voltage;
     };
-    optical_module _optical_module_;
+    //optical_module _optical_module_;
     std::vector<optical_module> optical_modules;
     
 };

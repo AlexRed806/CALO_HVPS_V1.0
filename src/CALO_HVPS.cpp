@@ -154,19 +154,19 @@ int CALO_HVPS::init(const std::string& l_chaine) {
             //CALO_HVPS::optical_module _optical_module_;
             
             string str_row = str_file_line.substr(5,2);
-            _optical_module_.location_channel.row = stoi(str_row);
+            _optical_module_._location_channel_.row = stoi(str_row);
             
             string str_column = str_file_line.substr(8,2);
-            _optical_module_.location_channel.column = stoi(str_column);
+            _optical_module_._location_channel_.column = stoi(str_column);
             
             string str_crate = str_file_line.substr(14,1);
-            _optical_module_.electronic_channel.crate = stoi(str_crate);
+            _optical_module_._electronic_channel_.crate = stoi(str_crate);
             
             string str_board = str_file_line.substr(16,2);
-            _optical_module_.electronic_channel.board = stoi(str_board);
+            _optical_module_._electronic_channel_.board = stoi(str_board);
             
             string str_channel = str_file_line.substr(19,2);
-            _optical_module_.electronic_channel.channel = stoi(str_channel);
+            _optical_module_._electronic_channel_.channel = stoi(str_channel);
             
             int file_line_length = std::distance(str_file_line.begin(),str_file_line.end());
             
