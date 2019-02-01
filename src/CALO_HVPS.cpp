@@ -501,11 +501,11 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
         
         for(std::vector<optical_module>::iterator it = optical_modules.begin(); it != optical_modules.end(); ++it) {
 
-            sprintf(RacineElementBoard,"board%02d",*it.electronic_channel.board);
-            sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,*it.electronic_channel.channel);
+            sprintf(RacineElementBoard,"board%02d",*it._electronic_channel_.board);
+            sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,*it._electronic_channel_.channel);
 
-            if( ( *it.location_channel.column == columnNumber && chaine.find("SetNominalCol")==0 )
-               || ( *it.location_channel.row == rowNumber && chaine.find("SetNominalRow")==0 )
+            if( ( *it._location_channel_.column == columnNumber && chaine.find("SetNominalCol")==0 )
+               || ( *it._location_channel_.row == rowNumber && chaine.find("SetNominalRow")==0 )
                || chaine.find("SetNominalAll")==0 ) {
                 
                 setChannel(RacineElementCh,*it.nominal_voltage);
