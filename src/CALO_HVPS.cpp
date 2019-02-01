@@ -151,7 +151,7 @@ int CALO_HVPS::init(const std::string& l_chaine) {
         
         if(str_file_line.compare(0,1,"M") == 0) {
             
-            optical_module _optical_module_;
+            //CALO_HVPS::optical_module _optical_module_;
             
             string str_row = str_file_line.substr(5,2);
             _optical_module_.location_channel.row = stoi(str_row);

@@ -63,6 +63,7 @@ private:
         int om_number;
         int nominal_voltage;
     };
+    optical_module _optical_module_;
     std::vector<optical_module> optical_modules;
     
 };
