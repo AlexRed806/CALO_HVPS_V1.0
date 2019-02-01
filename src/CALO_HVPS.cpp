@@ -139,8 +139,6 @@ int CALO_HVPS::init(const std::string& l_chaine) {
     
     ///////////   This part is to fill the mapping and reference values of OMs, added by Alessandro (not sure it should go here)   ///////////
     
-    nominal_tension[2][NB_MAX_MODULE][NB_MAX_CHANNEL];
-    
     ifstream inFile;
 
     inFile.open("calorimeter.map",ios::in);
