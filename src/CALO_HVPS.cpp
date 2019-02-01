@@ -151,27 +151,27 @@ int CALO_HVPS::init(const std::string& l_chaine) {
         
         if(str_file_line.compare(0,1,"M") == 0) {
             
-            //CALO_HVPS::optical_module _optical_module_;
+            optical_module _optical_module_;
             
             string str_row = str_file_line.substr(5,2);
-            _optical_module_._location_channel_.row = stoi(str_row);
+            _optical_module_._location_channel_.row = atoi((str_row).c_str());
             
             string str_column = str_file_line.substr(8,2);
-            _optical_module_._location_channel_.column = stoi(str_column);
+            _optical_module_._location_channel_.column = atoi((str_column).c_str());
             
             string str_crate = str_file_line.substr(14,1);
-            _optical_module_._electronic_channel_.crate = stoi(str_crate);
+            _optical_module_._electronic_channel_.crate = atoi((str_crate).c_str());
             
             string str_board = str_file_line.substr(16,2);
-            _optical_module_._electronic_channel_.board = stoi(str_board);
+            _optical_module_._electronic_channel_.board = atoi((str_board).c_str());
             
             string str_channel = str_file_line.substr(19,2);
-            _optical_module_._electronic_channel_.channel = stoi(str_channel);
+            _optical_module_._electronic_channel_.channel = atoi((str_channel).c_str());
             
             int file_line_length = std::distance(str_file_line.begin(),str_file_line.end());
             
             std::string str_voltage = str_file_line.substr(file_line_length-4,4);
-            _optical_module_.nominal_voltage = std::stoi(str_voltage);
+            _optical_module_.nominal_voltage = atoi((str_voltage).c_str());
             
             optical_modules.push_back(_optical_module_);
         }
@@ -428,10 +428,10 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
                     fan = valueString.c_str();
                 }
                 if(nameString.compare("row") ==0) {
-                    rowNumber = valueString.c_str();
+                    rowNumber = atoi(valueString.c_str());
                 }
                 if(nameString.compare("column") ==0) {
-                    columnNumber = valueString.c_str();
+                    columnNumber = atoi(valueString.c_str());
                 }
             } else {
                 //ret=1;
