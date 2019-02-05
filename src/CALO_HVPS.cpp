@@ -501,18 +501,22 @@ int CALO_HVPS::cmd(const std::string& command, int commandStringAck, std::string
         
         for(std::vector<optical_module>::iterator it = optical_modules.begin(); it != optical_modules.end(); ++it) {
 
+            char ElementColumn[100], ElementRow[100], ElementVoltage[100];
+            
             sprintf(RacineElementBoard,"board%02d",*it._electronic_channel_.board);
             sprintf(RacineElementCh,"%s.channel%02d",RacineElementBoard,*it._electronic_channel_.channel);
 
-            if( ( *it._location_channel_.column == columnNumber && chaine.find("SetNominalCol")==0 )
-               || ( *it._location_channel_.row == rowNumber && chaine.find("SetNominalRow")==0 )
+            sprintf(ElementColumn,"%s",*it._location_channel_.column);
+            sprintf(ElementRow,"%s",*it._location_channel_.row);
+            
+            if( ( ElementColumn == columnNumber && chaine.find("SetNominalCol")==0 )
+               || ( ElementRow == rowNumber && chaine.find("SetNominalRow")==0 )
                || chaine.find("SetNominalAll")==0 ) {
                 
-                char s[10];
-                sprintf(s,"%d",(*it).nominal_voltage);
+                sprintf(ElementVoltage,"%d",(*it).nominal_voltage);
                 //std::string s = string(itoa(*it.nominal_voltage));
 
-                setChannel(RacineElementCh,s);
+                setChannel(RacineElementCh,ElementVoltage);
                 startChannel(RacineElementCh);
             }
         }
